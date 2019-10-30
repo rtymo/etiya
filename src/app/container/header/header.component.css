@@ -1,0 +1,23 @@
+.header__container {
+  background-color: #465DEF;
+  min-height: 30px;
+  height: 50px;
+}
+
+.header__spacer {
+  flex: 1 1 auto;
+}
+
+.header_application_name {
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-variant: all-small-caps;
+}
+
+.header_button_login {
+  background-color: #465DEF;
+  font-size: 0.7rem;
+  color: white;
+}
