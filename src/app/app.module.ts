@@ -7,6 +7,10 @@ import { ContainerModule } from './container/container.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './user-info/user.module';
 import { AuthModule } from './auth/auth.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './auth/jwt.interceptor';
+import { ErrorInterceptor } from './auth/error.interceptor';
+import { fakeBackendProvider } from './auth/fake-backend';
 
 
 @NgModule({
@@ -18,10 +22,15 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     ContainerModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     UserModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

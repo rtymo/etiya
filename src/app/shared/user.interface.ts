@@ -4,14 +4,16 @@ export interface Roles {
   }
   
   export interface User {
-    uid: string;
-    email: string;
-    roles: Roles;
+    id: number;
+    email?: string;
+    roles?: Roles;
     name: string;
     surname: string;
-    gender: string;
-    phone: string;
-    address: string;
-    img: string;
+    username: string;
+    password: string;
+    phone?: string;
+    address?: string;
+    img?: string;
+    token?: string;
   }
   

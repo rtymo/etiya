@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogsService } from 'src/app/shared/dialogs.service';
 import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,15 +12,22 @@ export class HeaderComponent {
 
   constructor(
     private dialogs: DialogsService,
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   login() {
-    this.dialogs.openSignInDialog({title: 'Sign In'}).pipe(
+    this.dialogs.openSignInDialog({ title: 'Sign In' }).pipe(
       filter(Boolean)
     )
-    .subscribe(res => {
-      console.log(res)
-    });
+      .subscribe(res => {
+        console.log('')
+      });
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 
 }
