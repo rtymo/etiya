@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
       ...this.form.value
     };
     this.dialogRef.close(this.form.valid ? result : null);
-    console.log(this.f.username.value)
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(

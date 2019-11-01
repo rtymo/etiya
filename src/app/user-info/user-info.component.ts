@@ -25,7 +25,7 @@ export class UserInfoComponent {
       filter(Boolean)
     )
       .subscribe(res => {
-        console.log('')
+        console.log(res)
       });
   }
 

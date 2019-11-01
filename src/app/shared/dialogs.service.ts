@@ -35,6 +35,4 @@ export class DialogsService {
   } = {}): Observable<any> {
     return this.openDialog(LoginComponent, title, user);
   }
-  
-
 }
