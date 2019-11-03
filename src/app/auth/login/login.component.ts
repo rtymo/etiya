@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ControlsService } from 'src/app/shared/controls.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CreateUserComponent } from 'src/app/user-info/create-user/create-user.component';
+import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { first } from 'rxjs/operators';

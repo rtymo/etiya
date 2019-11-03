@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { User } from './user.interface';
-import { CreateUserComponent } from '../user-info/create-user/create-user.component';
-import { LoginComponent } from '../auth/login/login.component';
+import { User } from '../user.interface';
+import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
+import { LoginComponent } from '../../auth/login/login.component';
 
 @Injectable()
 export class DialogsService {

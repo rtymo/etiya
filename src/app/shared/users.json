@@ -1,1 +1,19 @@
-[{ "id": 1, "username": "test", "password": "test", "name": "Test", "surname": "User" }]
+[{
+    "username": "test",
+    "password": "test",
+    "name": "FirstUser",
+    "surname": "FirstUser"
+  },
+  {
+    "username": "test2",
+    "password": "test",
+    "name": "SecondUser",
+    "surname": "SecondUser"
+  },
+  {
+    "username": "test3",
+    "password": "test",
+    "name": "ThirdUser",
+    "surname": "ThirdUser"
+  }
+]

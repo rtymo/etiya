@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserInfoComponent } from './user-info.component';
-import { DialogsModule } from '../shared/dialogs.module';
+import { DialogsModule } from '../../shared/dialogs/dialogs.module';
+import { MaterialModule } from '../../material.module';
+import { TableModule } from '../../shared/table/table.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +11,9 @@ import { DialogsModule } from '../shared/dialogs.module';
   ],
   imports: [
     CommonModule,
-    DialogsModule
+    DialogsModule,
+    MaterialModule,
+    TableModule
   ]
 })
 export class UserModule { }

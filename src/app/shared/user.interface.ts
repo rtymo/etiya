@@ -3,7 +3,7 @@ export interface Roles {
     admin?: boolean;
   }
   export interface User {
-    id: number;
+    id?: number;
     email?: string;
     roles?: Roles;
     name: string;

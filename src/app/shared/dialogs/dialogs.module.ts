@@ -6,14 +6,15 @@ import { MatCardModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule,
          MatDialogModule, MatNativeDateModule, MatFormFieldModule, MatIconModule,
          MatInputModule, MatRadioModule, MatSelectModule, MAT_DIALOG_DATA
        } from '@angular/material';
-import { ControlsService } from './controls.service';
-import { CreateUserComponent } from '../user-info/create-user/create-user.component';
-import { LoginComponent } from '../auth/login/login.component';
+import { ControlsService } from '../controls.service';
+import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
+import { LoginComponent } from '../../auth/login/login.component';
+
 
 @NgModule({
   declarations: [
     CreateUserComponent,
-    LoginComponent
+    LoginComponent,
   ],
   entryComponents: [
     CreateUserComponent,
