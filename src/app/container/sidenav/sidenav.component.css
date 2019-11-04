@@ -6,3 +6,19 @@
   background-color: #42425C;
 }
 
+.link{
+  color: white;
+}
+
+.link:link, .link:visited {
+  background-color: #42425C;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.link:hover, .link:active {
+  background-color: rgb(35, 35, 83);
+}

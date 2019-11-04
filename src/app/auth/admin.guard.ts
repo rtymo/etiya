@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import { tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -10,12 +12,9 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-      return true;
-    }
+    return this.authenticationService.isAdmin$.pipe(
+      tap(isAdmin => !isAdmin && throwError('Access denied. Admins only'))
+    );
 
-    this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
-    return false;
   }
 }

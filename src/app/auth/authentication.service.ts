@@ -1,35 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../shared/environment';
-import { User } from '../shared/user.interface';
+import { Observable, from, of } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
-
-  constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+  isAdmin$: Observable<boolean>;
+  constructor(
+    public afAuth: AngularFireAuth,
+    private router: Router
+  ) {
+    this.isAdmin$ = this.afAuth.authState.pipe(
+      switchMap(user => user
+        ? of(true)
+        : of(null))
+    );
   }
 
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+  getAuth() {
+    return this.afAuth.authState;
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-      .pipe(map(user => {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
+    return from(this.afAuth.auth.signInWithEmailAndPassword(username, password));
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    this.router.navigate(['/']);
+    return this.afAuth.auth.signOut();
   }
 }

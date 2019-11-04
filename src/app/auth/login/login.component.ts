@@ -5,7 +5,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
-import { first } from 'rxjs/operators';
+import { first, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private notification: NotificationsService,
     @Inject(MAT_DIALOG_DATA) public initData
   ) { }
 
@@ -54,14 +57,15 @@ export class LoginComponent implements OnInit {
     };
     this.dialogRef.close(this.form.valid ? result : null);
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-        });
+      .pipe(
+        catchError(err => {
+          this.notification.errorNotification('Invalid credentials')
+          return throwError(err);
+      })
+      )
+      .subscribe(() => this.router.navigate(['/user']));
+
+
   }
 
 }

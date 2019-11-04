@@ -14,7 +14,7 @@ import { NotificationsService } from '../../shared/notifications/notifications.s
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent {
-  currentUser: User;
+  isLogin: boolean;
   filterStr = '';
   users = data;
 
@@ -24,7 +24,13 @@ export class UserInfoComponent {
     private authenticationService: AuthenticationService,
     private notification: NotificationsService,
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.authenticationService.getAuth().subscribe(auth => {
+      if (auth) {
+        this.isLogin = true;
+      } else {
+        this.isLogin = false;
+      }
+    });
   }
 
   data$ = of(this.users);

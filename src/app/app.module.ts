@@ -7,11 +7,15 @@ import { ContainerModule } from './container/container.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from './container/user-info/user.module';
 import { AuthModule } from './auth/auth.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from './auth/jwt.interceptor';
-import { ErrorInterceptor } from './auth/error.interceptor';
-import { fakeBackendProvider } from './auth/fake-backend';
+import { HttpClientModule } from '@angular/common/http';
 import { NotificationsModule } from './shared/notifications/notifications.module';
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from './shared/environment';
 
 
 @NgModule({
@@ -26,13 +30,14 @@ import { NotificationsModule } from './shared/notifications/notifications.module
     HttpClientModule,
     UserModule,
     AuthModule,
-    NotificationsModule
+    NotificationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

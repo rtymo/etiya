@@ -3,6 +3,7 @@ import { DialogsService } from '../../shared/dialogs/dialogs.service';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,7 +14,8 @@ export class HeaderComponent {
   constructor(
     private dialogs: DialogsService,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private notificationsService: NotificationsService
   ) { }
 
   login() {
@@ -21,7 +23,7 @@ export class HeaderComponent {
       filter(Boolean)
     )
       .subscribe(res => {
-        console.log('signIn')
+        console.log(res)
       });
   }
 
