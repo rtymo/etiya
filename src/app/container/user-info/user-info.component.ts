@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { DialogsService } from '../../shared/dialogs/dialogs.service';
 import { filter } from 'rxjs/operators';
-import { AuthenticationService } from '../../auth/authentication.service';
-import data from '../../shared/users.json';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { DatabaseService } from 'src/app/shared/db.service';
 
@@ -14,21 +12,13 @@ import { DatabaseService } from 'src/app/shared/db.service';
 export class UserInfoComponent {
   isLogin: boolean;
   filterStr = '';
-  users = data;
 
   constructor(
     private dialogs: DialogsService,
-    private authenticationService: AuthenticationService,
     private notification: NotificationsService,
     private db: DatabaseService
   ) {
-    this.authenticationService.getAuth().subscribe(auth => {
-      if (auth) {
-        this.isLogin = true;
-      } else {
-        this.isLogin = false;
-      }
-    });
+
   }
 
   data$ = this.db.getUsers();

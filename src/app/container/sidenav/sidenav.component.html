@@ -3,6 +3,7 @@
     <a class="link" href="/users">Users</a>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-main></app-main>
+    <!-- <app-main></app-main> -->
+    <app-user-info *ngIf="isLogin"></app-user-info>
   </mat-sidenav-content>
 </mat-sidenav-container>

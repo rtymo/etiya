@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContainerComponent } from './container.component';
 import { HeaderComponent } from './header/header.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../material.module';
+import { SidenavModule } from './sidenav/sidenav.module';
 
 
 @NgModule({
   declarations: [
     ContainerComponent,
     HeaderComponent,
-    SidenavComponent,
     MainComponent,
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    SidenavModule
   ]
 })
 export class ContainerModule { }

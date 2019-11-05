@@ -7,15 +7,13 @@ import { TableModule } from '../../shared/table/table.module';
 import { UserInfoService } from './user-info.service';
 
 @NgModule({
-  declarations: [
-    UserInfoComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     DialogsModule,
     MaterialModule,
     TableModule,
   ],
-  providers: [UserInfoService]
+  providers: [UserInfoService],
 })
 export class UserModule { }

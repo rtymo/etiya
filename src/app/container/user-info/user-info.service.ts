@@ -8,7 +8,7 @@ export class UserInfoService {
 
   constructor() { }
 
-  sendInformation(message: Object) {
+  sendInformation(message) {
     this.messageSource.next(message)
   }
 }

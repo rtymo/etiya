@@ -13,7 +13,6 @@ import countries from '../../../shared/countries.json';
 })
 export class AddressInfoComponent implements OnInit {
   form: FormGroup;
-  message:Object;
   countries = countries;
   makeControl = this.controls.makeControl(this.initData.data);
 
