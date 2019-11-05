@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { DialogsService } from '../../shared/dialogs/dialogs.service';
 import { filter } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
-import { User } from '../../shared/user.interface';
 import data from '../../shared/users.json';
-import { of } from 'rxjs';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { DatabaseService } from 'src/app/shared/db.service';
 
 @Component({
   selector: 'app-user-info',
@@ -20,9 +18,9 @@ export class UserInfoComponent {
 
   constructor(
     private dialogs: DialogsService,
-    private router: Router,
     private authenticationService: AuthenticationService,
     private notification: NotificationsService,
+    private db: DatabaseService
   ) {
     this.authenticationService.getAuth().subscribe(auth => {
       if (auth) {
@@ -33,11 +31,13 @@ export class UserInfoComponent {
     });
   }
 
-  data$ = of(this.users);
+  data$ = this.db.getUsers();
   colums = [
     { key: 'username', header: 'Username' },
     { key: 'name', header: 'Firstname' },
-    { key: 'surname', header: 'Lastname' }
+    { key: 'surname', header: 'Lastname' },
+    { key: 'email', header: 'Email'},
+    { key: 'phone', header: 'Phone'}
   ];
 
   applyFilter(value: any) {
@@ -49,7 +49,7 @@ export class UserInfoComponent {
       filter(Boolean)
     )
       .subscribe(res => {
-        console.log(res)
+        this.db.addUser(res);
         this.notification.successNotification('User added');
       });
   }

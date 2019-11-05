@@ -7,7 +7,7 @@ import { AuthGuard } from './auth/admin.guard';
 
 const routes: Routes = [
   { path: '', component: ContainerComponent },
-  { path: 'user', component: UserInfoComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserInfoComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 
 ];
