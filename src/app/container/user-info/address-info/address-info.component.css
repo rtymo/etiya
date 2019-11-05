@@ -1,0 +1,23 @@
+.profile_dialog_button_ok {
+  background-color: #465DEF;
+  color: #FFFFFF;
+}
+
+.profile_dialog_button_ok[disabled] {
+  color: white;
+  background-color: #465DEF;
+  opacity: 0.5;
+}
+
+.profile_dialog_buttons_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.full_size_form {
+  padding: 0 10px 0 10px;
+}
+
+.full_size_form>* {
+  width: 100%;
+}

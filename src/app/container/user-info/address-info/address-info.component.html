@@ -1,0 +1,58 @@
+<form [formGroup]="form" novalidate>
+  <div class="profile_dialog_personal_information_wrapper">
+    <div class="full_size_form">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Address Type"
+          formControlName="addressType"
+        />
+        <mat-error *ngIf="form.controls['addressType'].hasError('required')">
+          This field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Country" formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['country'].hasError('required')">
+          This field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="City" formControlName="city" />
+        <mat-error *ngIf="form.controls['city'].hasError('required')">
+          This field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="address" />
+        <mat-error *ngIf="form.controls['address'].hasError('required')">
+          The field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Postal code"
+          formControlName="postalCode"
+        />
+        <mat-error *ngIf="form.controls['postalCode'].hasError('required')">
+          This field is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div class="profile_dialog_buttons_wrapper">
+  <button
+    mat-button
+    class="profile_dialog_button_ok"
+    [disabled]="!form.valid || !form.dirty"
+    (click)="save()"
+  >
+    Save
+  </button>
+</div>

@@ -9,12 +9,14 @@ import { MatCardModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule,
 import { ControlsService } from '../controls.service';
 import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
 import { LoginComponent } from '../../auth/login/login.component';
+import { AddressInfoComponent } from 'src/app/container/user-info/address-info/address-info.component';
 
 
 @NgModule({
   declarations: [
     CreateUserComponent,
     LoginComponent,
+    AddressInfoComponent,
   ],
   entryComponents: [
     CreateUserComponent,

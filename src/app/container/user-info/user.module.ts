@@ -4,6 +4,7 @@ import { UserInfoComponent } from './user-info.component';
 import { DialogsModule } from '../../shared/dialogs/dialogs.module';
 import { MaterialModule } from '../../material.module';
 import { TableModule } from '../../shared/table/table.module';
+import { UserInfoService } from './user-info.service';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { TableModule } from '../../shared/table/table.module';
     CommonModule,
     DialogsModule,
     MaterialModule,
-    TableModule
-  ]
+    TableModule,
+  ],
+  providers: [UserInfoService]
 })
 export class UserModule { }
