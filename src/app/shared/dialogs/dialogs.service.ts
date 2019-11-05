@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../user.interface';
 import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
 import { LoginComponent } from '../../auth/login/login.component';
+import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 
 @Injectable()
 export class DialogsService {
@@ -35,4 +36,12 @@ export class DialogsService {
   } = {}): Observable<any> {
     return this.openDialog(LoginComponent, title, user);
   }
+
+  openEditUserDialog({
+    user = {},
+    title = 'Edit user',
+  } = {}): Observable<User | null> {
+    return this.openDialog(EditUserComponent, title, user);
+  }
+
 }

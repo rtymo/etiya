@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/auth/authentication.service';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
   isLogin: boolean;
   constructor(
     private authenticationService: AuthenticationService
@@ -19,8 +19,4 @@ export class SidenavComponent implements OnInit {
       }
     });
    }
-
-  ngOnInit() {
-  }
-
 }

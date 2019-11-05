@@ -1,0 +1,72 @@
+<h1 mat-dialog-title class="profile_dialog_title" mat-dialog-title>{{ initData.title }}</h1>
+<mat-dialog-content>
+  <div>
+    <form [formGroup]="form" novalidate>
+    <div class="profile_dialog_personal_information_wrapper">
+      <div class="full_size_form">
+        <mat-form-field>
+          <input matInput placeholder="Username" formControlName="username">
+          <mat-error *ngIf="form.controls['username'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="form.controls['email'].hasError('required')">
+            The field is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="form.controls['email'].hasError('email')">
+            Please enter a <strong>valid</strong> email address
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="password" formControlName="password">
+          <mat-error *ngIf="form.controls['password'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword">
+          <mat-error *ngIf="form.controls['confirmPassword'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="form.controls['confirmPassword'].hasError('matchPassword')">
+            Password not match
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="full_size_form">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+          <mat-error *ngIf="form.controls['name'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Surname" formControlName="surname">
+          <mat-error *ngIf="form.controls['surname'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phone">
+          <mat-error *ngIf="form.controls['phone'].hasError('required')">
+            This field is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="form.controls['phone'].hasError('pattern')">
+            This field must contain more than <strong>8 numbers</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions class="profile_dialog_buttons_wrapper">
+  <button mat-button class="profile_dialog_button_cancel" (click)="onNoClick()">
+    Cancel
+  </button>
+  <button mat-button class="profile_dialog_button_ok" [disabled]="!form.valid || !form.dirty" (click)="onOkClick()">
+    Next
+  </button>
+</div>

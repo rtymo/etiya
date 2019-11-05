@@ -12,7 +12,7 @@ import { DatabaseService } from 'src/app/shared/db.service';
 export class UserInfoComponent {
   isLogin: boolean;
   filterStr = '';
-
+  
   constructor(
     private dialogs: DialogsService,
     private notification: NotificationsService,
@@ -42,5 +42,14 @@ export class UserInfoComponent {
         this.db.addUser(res);
         this.notification.successNotification('User added');
       });
+  }
+
+  editUser() {
+    this.dialogs.openEditUserDialog({title: 'Edit target user'}).pipe(
+      filter(Boolean)
+    )
+      .subscribe(res => {
+        console.log(res)
+      })
   }
 }

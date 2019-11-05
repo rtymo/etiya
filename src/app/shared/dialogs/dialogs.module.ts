@@ -10,6 +10,7 @@ import { ControlsService } from '../controls.service';
 import { CreateUserComponent } from '../../container/user-info/create-user/create-user.component';
 import { LoginComponent } from '../../auth/login/login.component';
 import { AddressInfoComponent } from 'src/app/container/user-info/address-info/address-info.component';
+import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -17,10 +18,12 @@ import { AddressInfoComponent } from 'src/app/container/user-info/address-info/a
     CreateUserComponent,
     LoginComponent,
     AddressInfoComponent,
+    EditUserComponent
   ],
   entryComponents: [
     CreateUserComponent,
-    LoginComponent
+    LoginComponent,
+    EditUserComponent
   ],
   providers: [
     DialogsService,
