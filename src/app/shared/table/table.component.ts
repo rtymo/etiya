@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, Input, ViewChild, } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input, ViewChild, Output, EventEmitter, } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,8 @@ export class TableComponent implements OnInit {
   @Input() data: Observable<any[]>;
   @Input() columns: any[];
   @Input() filterValue = '';
+
+  @Output() clickOnUser = new EventEmitter();
 
   dataSource: any;
   displayedColumn: any[];
@@ -35,6 +37,10 @@ export class TableComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onTableRowClick(student) {
+    this.clickOnUser.emit(student);
   }
 
 }

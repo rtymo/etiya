@@ -3,7 +3,9 @@
     Create User
   </button>
 </div>
-
-
-<app-table [data]="data$" [columns]="colums" [filterValue]="filterStr">
+<app-table
+  [data]="data$"
+  [columns]="colums"
+  [filterValue]="filterStr"
+  (clickOnUser)="editUser($event)">
 </app-table>

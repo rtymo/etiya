@@ -6,9 +6,8 @@ export class UserInfoService {
   private messageSource = new BehaviorSubject({});
   currentUser = this.messageSource.asObservable();
 
-  constructor() { }
-
   sendInformation(message) {
     this.messageSource.next(message)
   }
+
 }

@@ -26,7 +26,7 @@ export class EditUserComponent implements OnInit {
   }
 
   createForm() {
-    const names = ['name', 'surname', 'phone', 'username', 'password', 'confirmPassword'];
+    const names = ['name', 'surname', 'phone', 'username', 'password', 'confirmPassword', 'id'];
     const requiredControls = this.controls.makeRequiredControls(this.initData.data, names);
 
     const makeControl = this.controls.makeControl(this.initData.data);
@@ -34,7 +34,10 @@ export class EditUserComponent implements OnInit {
     this.form = this.formBuilder.group({
       ...requiredControls,
       ...makeControl('email', Validators.required, Validators.email),
+      ...makeControl('name', Validators.required, Validators.minLength(4)),
+      ...makeControl('surname', Validators.required, Validators.minLength(4)),
       ...makeControl('phone', Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")),
+      ...makeControl('password', Validators.required, Validators.minLength(6)),
       ...makeControl('confirmPassword', Validators.required, passValidator)
     });
   }
@@ -44,12 +47,11 @@ export class EditUserComponent implements OnInit {
   }
 
   onOkClick() {
-
     const result = {
       ...this.initData.user,
       ...this.form.value
     };
-    console.log(result)
+    this.dialogRef.close(this.form.valid ? result : null);
   }
 
 }

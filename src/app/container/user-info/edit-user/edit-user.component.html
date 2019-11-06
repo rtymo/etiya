@@ -57,6 +57,7 @@
             This field must contain more than <strong>8 numbers</strong>
           </mat-error>
         </mat-form-field>
+          <input hidden matInput formControlName="id">
       </div>
     </div>
     </form>
@@ -67,6 +68,6 @@
     Cancel
   </button>
   <button mat-button class="profile_dialog_button_ok" [disabled]="!form.valid || !form.dirty" (click)="onOkClick()">
-    Next
+    Update
   </button>
 </div>
