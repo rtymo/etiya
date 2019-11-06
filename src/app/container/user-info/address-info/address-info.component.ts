@@ -14,6 +14,7 @@ import countries from '../../../shared/countries.json';
 export class AddressInfoComponent implements OnInit {
   form: FormGroup;
   countries = countries;
+  addressTypes = ['Home', 'Work']
   makeControl = this.controls.makeControl(this.initData.data);
 
   constructor(
