@@ -1,1 +1,25 @@
-<p>search works!</p>
+<form [formGroup]="form" novalidate>
+  <mat-form-field>
+    <input matInput placeholder="First name" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Last name" formControlName="surname" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Username" formControlName="username" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Phone" formControlName="phone" />
+  </mat-form-field>
+</form>
+
+<button mat-button (click)="search($event)">
+  Search
+</button>

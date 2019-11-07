@@ -1,18 +1,7 @@
-<!-- <mat-sidenav-container class="sidebar__container" *ngIf="isLogin">
-  <mat-sidenav class="sidebar" mode="side" opened >
-    <a class="link" href="/user-info">Users</a>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-main></app-main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-<div>
-  <h3>Please, sign In</h3>
-</div> -->
 
 <mat-sidenav-container autosize class="sidebar__container">
   <mat-sidenav mode="side" [opened]="opened" class="sidebar">
-    <mat-nav-list class="sidebar__navlist">
+    <mat-nav-list class="sidebar__navlist" *ngIf="isLogin">
       <a
         mat-list-item
         class="sidebar__a"
