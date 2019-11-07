@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContainerComponent } from './container/container.component';
-import { UserInfoComponent } from './container/user-info/user-info.component';
-import { AuthGuard } from './auth/admin.guard';
+import { containerRoutes } from './container/container-routing.module';
 
 
 const routes: Routes = [
-  { path: '', component: ContainerComponent },
-  { path: 'users', component: UserInfoComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' }
+  { path: '', component: ContainerComponent, children: containerRoutes },
+  { path: '**', redirectTo: 'main' }
 
 ];
 

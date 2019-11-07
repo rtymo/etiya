@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @Component({
@@ -8,6 +8,11 @@ import { AuthenticationService } from 'src/app/auth/authentication.service';
 })
 export class SidenavComponent {
   isLogin: boolean;
+  opened = true;
+
+  @Input()
+  places= [];
+
   constructor(
     private authenticationService: AuthenticationService
   ) {

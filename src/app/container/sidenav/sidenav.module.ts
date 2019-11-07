@@ -6,6 +6,7 @@ import { UserInfoComponent } from '../user-info/user-info.component';
 import { DialogsModule } from 'src/app/shared/dialogs/dialogs.module';
 import { TableModule } from 'src/app/shared/table/table.module';
 import { MainComponent } from '../main/main.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -20,6 +21,7 @@ import { MainComponent } from '../main/main.component';
     MaterialModule,
     DialogsModule,
     TableModule,
+    RouterModule
   ],
   exports: [SidenavComponent]
 })

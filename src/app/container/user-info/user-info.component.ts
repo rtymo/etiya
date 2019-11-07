@@ -3,7 +3,6 @@ import { DialogsService } from "../../shared/dialogs/dialogs.service";
 import { filter } from "rxjs/operators";
 import { NotificationsService } from "../../shared/notifications/notifications.service";
 import { DatabaseService } from "src/app/shared/db.service";
-import { UserInfoService } from "./user-info.service";
 
 @Component({
   selector: "app-user-info",
@@ -17,8 +16,7 @@ export class UserInfoComponent {
   constructor(
     private dialogs: DialogsService,
     private notification: NotificationsService,
-    private db: DatabaseService,
-    private userService: UserInfoService
+    private db: DatabaseService
   ) {}
 
   data$ = this.db.getUsers();

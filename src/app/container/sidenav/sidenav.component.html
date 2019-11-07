@@ -1,6 +1,6 @@
-<mat-sidenav-container class="sidebar__container" *ngIf="isLogin">
+<!-- <mat-sidenav-container class="sidebar__container" *ngIf="isLogin">
   <mat-sidenav class="sidebar" mode="side" opened >
-    <a class="link" href="/users">Users</a>
+    <a class="link" href="/user-info">Users</a>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-main></app-main>
@@ -8,4 +8,26 @@
 </mat-sidenav-container>
 <div>
   <h3>Please, sign In</h3>
-</div>
+</div> -->
+
+<mat-sidenav-container autosize class="sidebar__container">
+  <mat-sidenav mode="side" [opened]="opened" class="sidebar">
+    <mat-nav-list class="sidebar__navlist">
+      <a
+        mat-list-item
+        class="sidebar__a"
+        *ngFor="let place of places"
+        [routerLink]="place.location"
+        routerLinkActive="sidebar__a_active"
+      >
+        <span class="sidebar__text">
+          {{ place.name }}
+        </span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
