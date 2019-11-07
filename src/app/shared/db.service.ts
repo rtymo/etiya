@@ -52,4 +52,9 @@ export class DatabaseService {
   updateUser(user): Promise<void> {
     return this.afs.doc(`users/${user.id}`).update(user);
   }
+
+  deleteUser(id) {
+    this.afs.doc(`users/${id}`).delete();
+  }
+
 }

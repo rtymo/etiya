@@ -5,6 +5,8 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { ControlsService } from 'src/app/shared/controls.service';
 import { UserInfoService } from '../user-info.service';
 import { passValidator } from '../create-user/password.validator';
+import { DatabaseService } from 'src/app/shared/db.service';
+import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -18,6 +20,8 @@ export class EditUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<CreateUserComponent>,
     private controls: ControlsService,
+    private db: DatabaseService,
+    private notifications: NotificationsService,
     @Inject(MAT_DIALOG_DATA) public initData
   ) { }
 
@@ -48,10 +52,16 @@ export class EditUserComponent implements OnInit {
 
   onOkClick() {
     const result = {
-      ...this.initData.user,
       ...this.form.value
     };
     this.dialogRef.close(this.form.valid ? result : null);
+  }
+
+  deleteUser() {
+    const userID = this.form.value.id;
+    this.db.deleteUser(userID);
+    this.dialogRef.close(null);
+    this.notifications.successNotification('User was removed');
   }
 
 }

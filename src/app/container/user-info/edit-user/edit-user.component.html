@@ -53,7 +53,7 @@
           <mat-error *ngIf="form.controls['phone'].hasError('required')">
             This field is <strong>required</strong>
           </mat-error>
-          <mat-error *ngIf="form.controls['phone'].hasError('pattern')">
+          <mat-error *ngIf="form.controls['phone'].hasError('minlength') || form.controls['phone'].hasError('pattern')">
             This field must contain more than <strong>8 numbers</strong>
           </mat-error>
         </mat-form-field>
@@ -69,5 +69,8 @@
   </button>
   <button mat-button class="profile_dialog_button_ok" [disabled]="!form.valid || !form.dirty" (click)="onOkClick()">
     Update
+  </button>
+  <button mat-raised-button color="warn" (click)="deleteUser()">
+    Delete
   </button>
 </div>

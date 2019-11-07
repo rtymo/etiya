@@ -13,7 +13,6 @@ import { UserInfoService } from '../user-info.service';
 export class CreateUserComponent implements OnInit {
   form: FormGroup;
   additional_info: boolean;
-  result: any;
   makeControl = this.controls.makeControl(this.initData.data);
 
   constructor(
@@ -52,11 +51,10 @@ export class CreateUserComponent implements OnInit {
 
   onOkClick() {
     this.additional_info = true;
-    this.result = {
-      ...this.initData.user,
+    const result = {
       ...this.form.value
     };
-    this.userInfoService.sendInformation(this.result);
+    this.userInfoService.sendInformation(result);
   }
 
 }

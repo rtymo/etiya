@@ -1,3 +1,15 @@
+<div class="search-box">
+  <mat-form-field class="search-form" >
+    <input
+      matInput
+      maxlength="18"
+      autocomplete="off"
+      placeholder="Search"
+      (keyup)="applyFilter($event.target.value)"
+      >
+  </mat-form-field>
+</div>
+
 <div>
   <button mat-raised-button color="primary" (click)="createUser()">
     Create User

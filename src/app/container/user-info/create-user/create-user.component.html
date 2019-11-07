@@ -61,12 +61,12 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input type="number" matInput placeholder="Phone" formControlName="phone">
+          <input matInput placeholder="Phone" formControlName="phone">
+          <mat-error *ngIf="form.controls['phone'].hasError('minlength') || form.controls['phone'].hasError('pattern')">
+            This field must contain more than <strong>8 numbers</strong>
+          </mat-error>
           <mat-error *ngIf="form.controls['phone'].hasError('required')">
             This field is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="form.controls['phone'].hasError('pattern')">
-            This field must contain more than <strong>8 numbers</strong>
           </mat-error>
         </mat-form-field>
       </div>
