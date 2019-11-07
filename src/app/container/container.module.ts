@@ -11,7 +11,6 @@ import { SidenavModule } from './sidenav/sidenav.module';
   declarations: [
     ContainerComponent,
     HeaderComponent,
-    MainComponent,
   ],
   imports: [
     CommonModule,

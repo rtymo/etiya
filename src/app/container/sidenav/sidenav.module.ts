@@ -5,13 +5,15 @@ import { MaterialModule } from 'src/app/material.module';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { DialogsModule } from 'src/app/shared/dialogs/dialogs.module';
 import { TableModule } from 'src/app/shared/table/table.module';
+import { MainComponent } from '../main/main.component';
 
 
 
 @NgModule({
   declarations: [
     SidenavComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    MainComponent
   ],
   imports: [
     CommonModule,

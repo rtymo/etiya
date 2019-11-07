@@ -1,9 +1,11 @@
-<mat-sidenav-container class="sidebar__container">
-  <mat-sidenav class="sidebar" mode="side" opened>
+<mat-sidenav-container class="sidebar__container" *ngIf="isLogin">
+  <mat-sidenav class="sidebar" mode="side" opened >
     <a class="link" href="/users">Users</a>
   </mat-sidenav>
   <mat-sidenav-content>
-    <!-- <app-main></app-main> -->
-    <app-user-info *ngIf="isLogin"></app-user-info>
+    <app-main></app-main>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<div>
+  <h3>Please, sign In</h3>
+</div>
