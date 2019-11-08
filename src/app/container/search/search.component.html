@@ -20,6 +20,21 @@
   </mat-form-field>
 </form>
 
+<button mat-button (click)="clearForm()">
+  Clear
+</button>
 <button mat-button (click)="search($event)">
   Search
 </button>
+
+<div *ngIf="loaded">
+  <app-table
+    [data]="users$"
+    [columns]="mainColumns"
+    (clickOnUser)="getAdditionalInfo($event)"
+  >
+  </app-table>
+</div>
+<!-- <div>
+  <app-additional-info-table [data]="inputToChild"></app-additional-info-table>
+</div> -->

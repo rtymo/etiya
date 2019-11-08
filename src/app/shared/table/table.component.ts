@@ -22,12 +22,17 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   ngOnInit() {
-    this.data.subscribe(val => {
-      this.dataSource = new MatTableDataSource(val);
-      this.dataSource.sort = this.sort;
-      this.applyFilter(this.filterValue);
-    });
-    this.displayedColumn = this.columns.map(label => label.key);
+    if(!!this.data){
+      this.data.subscribe(val => {
+        this.dataSource = new MatTableDataSource(val);
+        this.dataSource.sort = this.sort;
+        if(!!this.filterValue){
+          this.applyFilter(this.filterValue);
+        }
+      });
+      this.displayedColumn = this.columns.map(label => label.key);
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges) {

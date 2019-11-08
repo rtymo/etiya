@@ -61,8 +61,19 @@ export class DatabaseService {
     return this.fetchCollection('users', ref => ref.where('city', '==', id));
   }
 
+  // getTargetUser(id: string) {
+
+  // }
+
   searchUsersInFirestore(start, end){
-    return this.afs.collection('users', ref => ref.limit(4).orderBy('name').startAt(start).endAt(end)).valueChanges();
+    return this.afs.collection('users', ref => ref.limit(4).orderBy('name').startAt(start).endAt(end)).snapshotChanges().pipe(
+      map(snapshots =>
+        snapshots.map(snap => ({
+          ...snap.payload.doc.data(),
+          id: snap.payload.doc.id
+        }))
+      )
+    );
   };
 
 }
