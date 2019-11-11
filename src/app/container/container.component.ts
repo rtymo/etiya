@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
 })
 export class ContainerComponent {
   places$= [
-    { name: "Users", location: "/user-info"},
+    { name: "Users", location: "/main"},
     { name: "Search", location: "/search"}
   ];
 }

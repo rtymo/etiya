@@ -21,10 +21,7 @@ export class HeaderComponent {
   login() {
     this.dialogs.openSignInDialog({ title: 'Sign In' }).pipe(
       filter(Boolean)
-    )
-      .subscribe(res => {
-        console.log(res)
-      });
+    ).subscribe(()=> this.notificationsService.successNotification('Login is successful'))
   }
 
   logout() {

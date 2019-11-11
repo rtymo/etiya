@@ -1,0 +1,34 @@
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.second_row {
+  display: flex;
+  padding: 1em;
+}
+
+.inputs{
+  padding-left: 1em;;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.search_button {
+  background-color: #465DEF;
+  color: #FFFFFF;
+}
+
+.search_button[disabled] {
+  color: white;
+  background-color: #465DEF;
+  opacity: 0.5;
+}

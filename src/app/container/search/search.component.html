@@ -1,32 +1,52 @@
-<form [formGroup]="form" novalidate>
-  <mat-form-field>
-    <input matInput placeholder="First name" formControlName="name" />
-  </mat-form-field>
+<div class="form">
+  <form [formGroup]="form" novalidate>
+    <div class="row">
+      <mat-form-field class="inputs">
+        <input matInput placeholder="First name" formControlName="name" />
+        <mat-error *ngIf="form.controls['name'].hasError('minlength')">
+            This field required <strong>min 2 symbols</strong>
+          </mat-error>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Last name" formControlName="surname" />
-  </mat-form-field>
+      <mat-form-field class="inputs">
+        <input matInput placeholder="Last name" formControlName="surname" />
+        <mat-error *ngIf="form.controls['surname'].hasError('minlength')">
+            This field required <strong>min 2 symbols</strong>
+          </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="second_row">
+      <mat-form-field class="inputs">
+        <input matInput placeholder="Username" formControlName="username" />
+        <mat-error *ngIf="form.controls['username'].hasError('minlength')">
+            This field required <strong>min 2 symbols</strong>
+          </mat-error>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Username" formControlName="username" />
-  </mat-form-field>
+      <mat-form-field class="inputs">
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="form.controls['email'].hasError('minlength')">
+            This field required <strong>correct Email address</strong>
+          </mat-error>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Email" formControlName="email" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Phone" formControlName="phone" />
-  </mat-form-field>
-</form>
-
-<button mat-button (click)="clearForm()">
-  Clear
-</button>
-<button mat-button (click)="search($event)">
-  Search
-</button>
-
+      <mat-form-field class="inputs">
+        <input matInput placeholder="Phone" formControlName="phone" />
+        <mat-error *ngIf="form.controls['phone'].hasError('minlength')">
+            This field required <strong>min 6 numbers</strong>
+          </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div class="buttons">
+  <button mat-button class="clear_button" (click)="clearForm()">
+    Clear
+  </button>
+  <button mat-button class="search_button" [disabled]="!form.valid || !form.dirty" (click)="search()">
+    Search
+  </button>
+</div>
 <div *ngIf="loaded">
   <app-table
     [data]="users$"

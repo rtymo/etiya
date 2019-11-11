@@ -6,7 +6,7 @@ import { containerRoutes } from './container/container-routing.module';
 
 const routes: Routes = [
   { path: '', component: ContainerComponent, children: containerRoutes },
-  { path: '**', redirectTo: 'main' }
+  { path: '**', redirectTo: '' }
 
 ];
 

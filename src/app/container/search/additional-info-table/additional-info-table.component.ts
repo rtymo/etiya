@@ -3,6 +3,7 @@ import { User } from "src/app/shared/user.interface";
 import { DatabaseService } from 'src/app/shared/db.service';
 import { DialogsService } from 'src/app/shared/dialogs/dialogs.service';
 import { filter } from 'rxjs/operators';
+import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 
 @Component({
   selector: "app-additional-info-table",
@@ -14,19 +15,13 @@ export class AdditionalInfoTableComponent {
 
   dataSource;
 
-  // additionalColumns = [
-  //   { key: "addressType", header: "Address Type" },
-  //   { key: "address", header: "Address" },
-  //   { key: "country", header: "Country" },
-  //   { key: "city", header: "City" },
-  //   { key: "postalCode", header: "Postal Code" }
-  // ]
-
   additionalColumns = ["addressType", "country", 'city', 'postalCode', 'actions'];
 
   constructor(
     private db: DatabaseService,
     private dialogs: DialogsService,
+    private notifications: NotificationsService
+
   ) {}
 
 
@@ -37,7 +32,6 @@ export class AdditionalInfoTableComponent {
         change.currentValue
       ];
     }
-    console.log(change);
   }
 
   editAddress(user) {
@@ -45,9 +39,8 @@ export class AdditionalInfoTableComponent {
       .openEditAdditionalInfoDialog({ user })
       .pipe(filter(Boolean))
       .subscribe(res => {
-        console.log(res)
         this.db.updateAdditionalInfo(res);
-        // this.notification.successNotification("User updated");
+        this.notifications.successNotification("Additional information was updated");
       });
   }
 
