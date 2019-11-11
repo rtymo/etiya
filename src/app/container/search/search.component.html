@@ -55,6 +55,6 @@
   >
   </app-table>
 </div>
-<div>
+<div *ngIf="inputToChild">
   <app-additional-info-table [data]="inputToChild"></app-additional-info-table>
 </div>

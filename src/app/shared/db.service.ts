@@ -61,12 +61,8 @@ export class DatabaseService {
     this.afs.doc(`users/${id}`).delete();
   }
 
-  getUserByCity(id: string) {
-    return this.fetchCollection('users', ref => ref.where('city', '==', id));
-  }
-
-  searchUsersInFirestore(start, end){
-    return this.afs.collection('users', ref => ref.limit(4).orderBy('name').startAt(start).endAt(end)).snapshotChanges().pipe(
+  searchUsersInFirestore(start, end, query="name"){
+    return this.afs.collection('users', ref => ref.limit(4).orderBy(query).startAt(start).endAt(end)).snapshotChanges().pipe(
       map(snapshots =>
         snapshots.map(snap => ({
           ...snap.payload.doc.data(),

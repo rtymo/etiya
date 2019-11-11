@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  SimpleChanges
+} from "@angular/core";
 import { DatabaseService } from "src/app/shared/db.service";
 import { Subject, combineLatest, Observable, from, of } from "rxjs";
 import { AngularFirestore } from "angularfire2/firestore";
@@ -25,12 +31,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    combineLatest(this.startObs, this.endObs).subscribe(value => {
-      this.db.searchUsersInFirestore(value[0], value[1]).subscribe(users => {
-        this.users$ = of(users);
-        this.loaded = true;
-      });
-    });
+    this.updateResultTable();
   }
 
   mainColumns = [
@@ -47,6 +48,20 @@ export class SearchComponent implements OnInit {
 
   clearForm() {
     this.form.reset();
+  }
+
+  searchInDB(firstValue, secondValue) {
+    this.db.searchUsersInFirestore(firstValue, secondValue).subscribe(users => {
+      this.users$ = of(users);
+      console.log(this.users$)
+      this.loaded = true;
+    });
+  }
+
+  updateResultTable() {
+    combineLatest(this.startObs, this.endObs).subscribe(value => {
+      this.searchInDB(value[0], value[1]);
+    });
   }
 
   createForm() {
