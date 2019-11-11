@@ -50,13 +50,13 @@ export class SearchComponent implements OnInit {
     { key: "phone", header: "Phone" }
   ];
 
-  
+
   get f() { return this.form.controls; }
 
 
-  applyFilter(value: any) {
-    this.filterStr = value;
-  }
+  // applyFilter(value: any) {
+  //   this.filterStr = value;
+  // }
 
   clearForm() {
     this.form.reset();
@@ -81,40 +81,5 @@ export class SearchComponent implements OnInit {
 
   getAdditionalInfo(targetUser){
     this.inputToChild = targetUser;
-    // this.userInfo.emit(targetUser);
-    // this.db.getUser(targetUser.id).subscribe((user) => {
-    //   this.additionalinfo$ = of(user);
-    // })
-    // this.additionalinfo$.subscribe((info) => {
-    //     console.log(info)
-    // })
-    // this.users$.subscribe(user =>{
-    //   user.map(data => {
-    //     // if(targetUser._isEqual(data)){
-    //     //   console.log('done');
-    //     // }
-    //     if(_.isEqual(targetUser, data)){
-    //       console.log(data);
-    //       console.log(targetUser)
-    //       this.additionalinfo$ = of(data);
-    //       this.additionalInfo = true;
-          // this.applyFilter(data)
-
-      //   }
-      // })
-      // if(targetUser.id != user.id){
-      //   console.log(user.id)
-      //   console.log(this.users$[0])
-
-    // })
-
-    // this.db.getUser(user.id)
-    //   .subscribe(data=>{
-    //     this.additionalinfo$ = of(data);
-    //     // this.additionalinfo$.subscribe(data = console.log(data))
-
-    //   })
-    //   this.additionalinfo$.subscribe(data=>console.log(data))
-
   }
 }

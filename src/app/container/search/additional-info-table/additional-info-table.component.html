@@ -1,7 +1,42 @@
 <!-- <app-table
-    [data]="users$"
+    [data]="additionalInfo$"
     [columns]="additionalColumns"
     (clickOnUser)="getAdditionalInfo($event)"
   >
   </app-table> -->
-<button (click)="test()">click</button>
+<!-- <button (click)="test()">click</button> -->
+<div class="table__container" *ngIf="dataSource">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="addressType">
+      <th mat-header-cell *matHeaderCellDef>Address Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.addressType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef>Country</th>
+      <td mat-cell *matCellDef="let element">{{ element.country }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef>City</th>
+      <td mat-cell *matCellDef="let element">{{ element.city }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="postalCode">
+      <th mat-header-cell *matHeaderCellDef>Postal Code</th>
+      <td mat-cell *matCellDef="let element">{{ element.postalCode }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click) ="editAddress(element)" >Edit</button>
+          <button mat-raised-button >Delete</button>
+          <button mat-raised-button >Add New</button>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="additionalColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: additionalColumns"></tr>
+  </table>
+</div>

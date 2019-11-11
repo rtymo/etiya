@@ -11,6 +11,7 @@ import { CreateUserComponent } from '../../container/user-info/create-user/creat
 import { LoginComponent } from '../../auth/login/login.component';
 import { AddressInfoComponent } from 'src/app/container/user-info/address-info/address-info.component';
 import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
+import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address-info/edit-additional-info/edit-additional-info.component';
 
 
 @NgModule({
@@ -18,12 +19,14 @@ import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-us
     CreateUserComponent,
     LoginComponent,
     AddressInfoComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditAdditionalInfoComponent
   ],
   entryComponents: [
     CreateUserComponent,
     LoginComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditAdditionalInfoComponent
   ],
   providers: [
     DialogsService,

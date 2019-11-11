@@ -1,50 +1,54 @@
-import { Component, OnInit, Input, SimpleChange } from '@angular/core';
-import { of } from 'rxjs';
+import { Component, Input, SimpleChange } from "@angular/core";
+import { User } from "src/app/shared/user.interface";
 import { DatabaseService } from 'src/app/shared/db.service';
-import { User } from 'src/app/shared/user.interface';
+import { DialogsService } from 'src/app/shared/dialogs/dialogs.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-additional-info-table',
-  templateUrl: './additional-info-table.component.html',
-  styleUrls: ['./additional-info-table.component.css']
+  selector: "app-additional-info-table",
+  templateUrl: "./additional-info-table.component.html",
+  styleUrls: ["./additional-info-table.component.css"]
 })
-export class AdditionalInfoTableComponent implements OnInit {
+export class AdditionalInfoTableComponent {
   @Input() data: User;
 
-  // userID = this.data.id
-  additionalInfo$;
+  dataSource;
 
-  additionalColumns = [
-    { key: "addressType", header: "Address Type" },
-    { key: "address", header: "Address" },
-    { key: "country", header: "Country" },
-    { key: "city", header: "City" },
-    { key: "postalCode", header: "Postal Code" }
-  ]
+  // additionalColumns = [
+  //   { key: "addressType", header: "Address Type" },
+  //   { key: "address", header: "Address" },
+  //   { key: "country", header: "Country" },
+  //   { key: "city", header: "City" },
+  //   { key: "postalCode", header: "Postal Code" }
+  // ]
+
+  additionalColumns = ["addressType", "country", 'city', 'postalCode', 'actions'];
 
   constructor(
-    private db: DatabaseService
-  ) { }
+    private db: DatabaseService,
+    private dialogs: DialogsService,
+  ) {}
 
-  ngOnInit() {
-    this.db.getUser("Sxg98mxL98eTi3flhbW7").subscribe((res) => {
-      this.additionalInfo$ = of([res])
-      console.log(this.additionalInfo$)
-    })
+
+  ngOnChanges(changes: SimpleChange) {
+    let change: SimpleChange = changes['data'];
+    if (!!this.data) {
+      this.dataSource = [
+        change.currentValue
+      ];
+    }
+    console.log(change);
   }
 
-  ngOnChanges(){
-    // let change: SimpleChange = changes['data'];
-
-    // this.additionalInfo = this.data;
-    // console.log(this.data.id)
-
+  editAddress(user) {
+    this.dialogs
+      .openEditAdditionalInfoDialog({ user })
+      .pipe(filter(Boolean))
+      .subscribe(res => {
+        console.log(res)
+        this.db.updateAdditionalInfo(res);
+        // this.notification.successNotification("User updated");
+      });
   }
 
-  test() {
-    // console.log(this.data.id)
-    // this.db.getUser("Sxg98mxL98eTi3flhbW7").subscribe((res) => {
-    //   this.additionalInfo$ = of([res])
-    // })
-  }
 }

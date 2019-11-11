@@ -53,6 +53,10 @@ export class DatabaseService {
     return this.afs.doc(`users/${user.id}`).update(user);
   }
 
+  updateAdditionalInfo(user) {
+    return this.afs.doc(`users/${user.id}`).update(user)
+  }
+
   deleteUser(id) {
     this.afs.doc(`users/${id}`).delete();
   }

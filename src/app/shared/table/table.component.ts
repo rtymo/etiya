@@ -36,8 +36,8 @@ export class TableComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.dataSource &&
-    this.applyFilter(changes.filterValue.currentValue);
+    this.dataSource;
+    // this.applyFilter(changes.filterValue.currentValue);
   }
 
   applyFilter(filterValue: string) {
