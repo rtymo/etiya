@@ -12,6 +12,7 @@ import { LoginComponent } from '../../auth/login/login.component';
 import { AddressInfoComponent } from 'src/app/container/user-info/address-info/address-info.component';
 import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address-info/edit-additional-info/edit-additional-info.component';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 
 @NgModule({
@@ -20,13 +21,15 @@ import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address
     LoginComponent,
     AddressInfoComponent,
     EditUserComponent,
-    EditAdditionalInfoComponent
+    EditAdditionalInfoComponent,
+    ConfirmationComponent
   ],
   entryComponents: [
     CreateUserComponent,
     LoginComponent,
     EditUserComponent,
-    EditAdditionalInfoComponent
+    EditAdditionalInfoComponent,
+    ConfirmationComponent
   ],
   providers: [
     DialogsService,

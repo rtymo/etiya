@@ -6,13 +6,14 @@ import { CreateUserComponent } from '../../container/user-info/create-user/creat
 import { LoginComponent } from '../../auth/login/login.component';
 import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address-info/edit-additional-info/edit-additional-info.component';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Injectable()
 export class DialogsService {
 
   constructor(private matDialog: MatDialog) { }
 
-  openDialog(component, title, data) {
+  openDialog(component, title, data?) {
     return this.matDialog.open(
       component,
       {
@@ -52,4 +53,9 @@ export class DialogsService {
     return this.openDialog(EditAdditionalInfoComponent, title, user);
   }
 
+  openConfirmationDialog({
+    title = 'Confirm your action',
+  } = {}) {
+    return this.openDialog(ConfirmationComponent, title);
+  }
 }
