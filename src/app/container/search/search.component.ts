@@ -1,17 +1,11 @@
 import {
   Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  SimpleChanges
+  OnInit
 } from "@angular/core";
 import { DatabaseService } from "src/app/shared/db.service";
-import { Subject, combineLatest, Observable, from, of } from "rxjs";
-import { AngularFirestore } from "angularfire2/firestore";
+import { Subject, of } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { pluck } from "rxjs/operators";
 
-import _ from "lodash";
 import { User } from "src/app/shared/user.interface";
 @Component({
   selector: "app-search",
@@ -31,7 +25,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.updateResultTable();
   }
 
   mainColumns = [
@@ -48,20 +41,19 @@ export class SearchComponent implements OnInit {
 
   clearForm() {
     this.form.reset();
+    this.loaded = false;
   }
 
-  searchInDB(firstValue, secondValue) {
-    this.db.searchUsersInFirestore(firstValue, secondValue).subscribe(users => {
+  searchInDB(firstValue, secondValue, query) {
+    this.db.searchUsersInFirestore(firstValue, secondValue, query)
+    .subscribe(users => {
       this.users$ = of(users);
-      console.log(this.users$)
       this.loaded = true;
     });
   }
 
-  updateResultTable() {
-    combineLatest(this.startObs, this.endObs).subscribe(value => {
-      this.searchInDB(value[0], value[1]);
-    });
+  updateResultTable(startSearch, endSearch, q:string) {
+    return this.searchInDB(startSearch, endSearch, q)
   }
 
   createForm() {
@@ -75,32 +67,32 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    const values = Object.keys(this.form.controls);
-    values.map(value => {
-      switch (value) {
+    const inputNames = Object.keys(this.form.controls);
+    inputNames.map(inputName => {
+      switch (inputName) {
         case "name":
-          if (!!this.f[value].value) {
-            this.prepateToSearch(this.f[value].value);
+          if (!!this.f[inputName].value) {
+            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "name")
           }
           break;
         case "surname":
-          if (!!this.f[value].value) {
-            this.prepateToSearch(this.f[value].value);
+          if (!!this.f[inputName].value) {
+            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "surname")
           }
           break;
         case "username":
-          if (!!this.f[value].value) {
-            this.prepateToSearch(this.f[value].value);
+          if (!!this.f[inputName].value) {
+            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "username")
           }
           break;
         case "email":
-          if (!!this.f[value].value) {
-            this.prepateToSearch(this.f[value].value);
+          if (!!this.f[inputName].value) {
+            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "email")
           }
           break;
         case "phone":
-          if (!!this.f[value].value) {
-            this.prepateToSearch(this.f[value].value);
+          if (!!this.f[inputName].value) {
+            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "phone")
           }
           break;
       }
@@ -108,11 +100,8 @@ export class SearchComponent implements OnInit {
     this.form.reset();
   }
 
-  prepateToSearch(val) {
-    this.startAt.next(val);
-    this.endAt.next(val + "\uf8ff");
-  }
   getAdditionalInfo(targetUser) {
     this.inputToChild = targetUser;
   }
+
 }

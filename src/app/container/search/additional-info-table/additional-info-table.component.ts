@@ -11,13 +11,14 @@ import { of } from "rxjs";
   templateUrl: "./additional-info-table.component.html",
   styleUrls: ["./additional-info-table.component.css"]
 })
-export class AdditionalInfoTableComponent implements OnInit {
+export class AdditionalInfoTableComponent {
   @Input() data: User;
 
   dataSource$;
 
   additionalColumns = [
     { key: "addressType", header: "addressType" },
+    { key: 'addresses', header: "AddressTypes"},
     { key: "country", header: "country" },
     { key: "city", header: "city" },
     { key: "postalCode", header: "postalCode" }
@@ -28,17 +29,9 @@ export class AdditionalInfoTableComponent implements OnInit {
     private notifications: NotificationsService
   ) {}
 
-  ngOnInit() {
-    this.dataSource$ = of([this.data]);
-  }
-
   ngOnChanges(changes) {
-    // let change: SimpleChange = changes['data'];
-    console.log(changes.data.currentValue);
-    // if (!!this.data) {
     this.dataSource$ = of([changes.data.currentValue]);
-    console.log(this.dataSource$)
-    // }
+    console.log(changes.data.currentValue)
   }
 
   editAddress(user) {

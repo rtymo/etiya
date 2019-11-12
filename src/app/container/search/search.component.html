@@ -44,10 +44,10 @@
     Clear
   </button>
   <button mat-button class="search_button" [disabled]="!form.valid || !form.dirty" (click)="search()">
-    Search
+    Find
   </button>
 </div>
-<div *ngIf="loaded">
+<div *ngIf="users$">
   <app-table
     [data]="users$"
     [columns]="mainColumns"
