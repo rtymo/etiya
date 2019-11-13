@@ -15,10 +15,9 @@ export class AdditionalInfoTableComponent {
   @Input() data: User;
 
   dataSource$;
-
+  userID: string;
   additionalColumns = [
-    { key: "addressType", header: "addressType" },
-    { key: 'addresses', header: "AddressTypes"},
+    { key: "name", header: "address Type" },
     { key: "country", header: "country" },
     { key: "city", header: "city" },
     { key: "postalCode", header: "postalCode" }
@@ -30,8 +29,9 @@ export class AdditionalInfoTableComponent {
   ) {}
 
   ngOnChanges(changes) {
-    this.dataSource$ = of([changes.data.currentValue]);
     console.log(changes.data.currentValue)
+    this.dataSource$ = of(changes.data.currentValue.data);
+    this.userID = changes.data.currentValue.id;
   }
 
   editAddress(user) {
@@ -39,7 +39,8 @@ export class AdditionalInfoTableComponent {
       .openEditAdditionalInfoDialog({ user })
       .pipe(filter(Boolean))
       .subscribe(res => {
-        this.db.updateAdditionalInfo(res);
+        console.log(res)
+        this.db.updateAdditionalInfo(res, this.userID);
         this.notifications.successNotification(
           "Additional information was updated"
         );

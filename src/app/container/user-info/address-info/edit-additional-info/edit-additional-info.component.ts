@@ -29,7 +29,7 @@ export class EditAdditionalInfoComponent implements OnInit {
   }
 
   createForm() {
-    const names = ['addressType', 'country', 'city', 'postalCode', 'id'];
+    const names = ['name', 'country', 'city', 'postalCode'];
     const requiredControls = this.controls.makeRequiredControls(this.initData.data, names);
 
     const makeControl = this.controls.makeControl(this.initData.data);
@@ -51,7 +51,5 @@ export class EditAdditionalInfoComponent implements OnInit {
     };
     this.dialogRef.close(this.form.valid ? result : null);
   }
-
-
 
 }

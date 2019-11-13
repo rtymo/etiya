@@ -17,7 +17,8 @@ export class UserInfoComponent {
     private dialogs: DialogsService,
     private notification: NotificationsService,
     private db: DatabaseService
-  ) {}
+  ) {
+  }
 
   data$ = this.db.getUsers();
   colums = [

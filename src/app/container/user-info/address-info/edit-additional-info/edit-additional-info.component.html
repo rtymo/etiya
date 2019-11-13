@@ -1,49 +1,55 @@
-<h1 mat-dialog-title class="profile_dialog_title" mat-dialog-title>{{ initData.title }}</h1>
+<h1 mat-dialog-title class="profile_dialog_title" mat-dialog-title>
+  {{ initData.title }}
+</h1>
 <mat-dialog-content>
   <div>
     <form [formGroup]="form" novalidate>
-    <div class="profile_dialog_personal_information_wrapper">
-      <div class="full_size_form">
+      <div class="profile_dialog_personal_information_wrapper">
+        <div class="full_size_form">
           <mat-form-field>
-              <mat-label>Address Type</mat-label>
-              <mat-select placeholder="Address Type" formControlName="addressType">
-                <mat-option *ngFor="let addressType of addressTypes" [value]="addressType">
-                  {{ addressType }}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="form.controls['addressType'].hasError('required')">
-                This field is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Country" formControlName="country">
-          <mat-error *ngIf="form.controls['country'].hasError('required')">
-            The field is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="full_size_form">
-        <mat-form-field>
-          <input matInput placeholder="City" formControlName="city">
-          <mat-error *ngIf="form.controls['city'].hasError('required')">
-            This field is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="form.controls['city'].hasError('minlength')">
+            <input matInput placeholder="Address Type" formControlName="name" />
+            <mat-error *ngIf="form.controls['name'].hasError('required')">
+              The field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Country" formControlName="country" />
+            <mat-error *ngIf="form.controls['country'].hasError('required')">
+              The field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="full_size_form">
+          <mat-form-field>
+            <input matInput placeholder="City" formControlName="city" />
+            <mat-error *ngIf="form.controls['city'].hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls['city'].hasError('minlength')">
               This field must contain more than <strong>4 letters</strong>
             </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Postal Code" formControlName="postalCode">
-          <mat-error *ngIf="form.controls['postalCode'].hasError('required')">
-            This field is <strong>required</strong>
-          </mat-error>
-          <mat-error *ngIf="form.controls['postalCode'].hasError('minlength') || form.controls['postalCode'].hasError('pattern')">
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Postal Code"
+              formControlName="postalCode"
+            />
+            <mat-error *ngIf="form.controls['postalCode'].hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                form.controls['postalCode'].hasError('minlength') ||
+                form.controls['postalCode'].hasError('pattern')
+              "
+            >
               This field must contain more than <strong>4 numbers</strong>
             </mat-error>
-        </mat-form-field>
-        <input hidden matInput formControlName="id">
+          </mat-form-field>
+          <!-- <input hidden matInput formControlName="id" /> -->
+        </div>
       </div>
-    </div>
     </form>
   </div>
 </mat-dialog-content>
@@ -51,7 +57,12 @@
   <button mat-button class="profile_dialog_button_cancel" (click)="onNoClick()">
     Cancel
   </button>
-  <button mat-button class="profile_dialog_button_ok" [disabled]="!form.valid || !form.dirty" (click)="onOkClick()">
+  <button
+    mat-button
+    class="profile_dialog_button_ok"
+    [disabled]="!form.valid || !form.dirty"
+    (click)="onOkClick()"
+  >
     Update
   </button>
 </div>

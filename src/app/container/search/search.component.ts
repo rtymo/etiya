@@ -1,12 +1,10 @@
-import {
-  Component,
-  OnInit
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { DatabaseService } from "src/app/shared/db.service";
 import { Subject, of } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { User } from "src/app/shared/user.interface";
+import { pluck, map } from "rxjs/operators";
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
@@ -19,7 +17,7 @@ export class SearchComponent implements OnInit {
   loaded: boolean = false;
   startObs = this.startAt.asObservable();
   endObs = this.endAt.asObservable();
-  inputToChild: User;
+  inputToChild;
   users$;
   constructor(private db: DatabaseService, private formBuilder: FormBuilder) {}
 
@@ -45,15 +43,16 @@ export class SearchComponent implements OnInit {
   }
 
   searchInDB(firstValue, secondValue, query) {
-    this.db.searchUsersInFirestore(firstValue, secondValue, query)
-    .subscribe(users => {
-      this.users$ = of(users);
-      this.loaded = true;
-    });
+    this.db
+      .searchUsersInFirestore(firstValue, secondValue, query)
+      .subscribe(users => {
+        this.users$ = of(users);
+        this.loaded = true;
+      });
   }
 
-  updateResultTable(startSearch, endSearch, q:string) {
-    return this.searchInDB(startSearch, endSearch, q)
+  updateResultTable(startSearch, endSearch, q: string) {
+    return this.searchInDB(startSearch, endSearch, q);
   }
 
   createForm() {
@@ -72,27 +71,47 @@ export class SearchComponent implements OnInit {
       switch (inputName) {
         case "name":
           if (!!this.f[inputName].value) {
-            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "name")
+            this.updateResultTable(
+              this.f[inputName].value,
+              `${this.f[inputName].value}\uf8ff`,
+              "name"
+            );
           }
           break;
         case "surname":
           if (!!this.f[inputName].value) {
-            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "surname")
+            this.updateResultTable(
+              this.f[inputName].value,
+              `${this.f[inputName].value}\uf8ff`,
+              "surname"
+            );
           }
           break;
         case "username":
           if (!!this.f[inputName].value) {
-            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "username")
+            this.updateResultTable(
+              this.f[inputName].value,
+              `${this.f[inputName].value}\uf8ff`,
+              "username"
+            );
           }
           break;
         case "email":
           if (!!this.f[inputName].value) {
-            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "email")
+            this.updateResultTable(
+              this.f[inputName].value,
+              `${this.f[inputName].value}\uf8ff`,
+              "email"
+            );
           }
           break;
         case "phone":
           if (!!this.f[inputName].value) {
-            this.updateResultTable(this.f[inputName].value, `${this.f[inputName].value}\uf8ff`, "phone")
+            this.updateResultTable(
+              this.f[inputName].value,
+              `${this.f[inputName].value}\uf8ff`,
+              "phone"
+            );
           }
           break;
       }
@@ -101,7 +120,18 @@ export class SearchComponent implements OnInit {
   }
 
   getAdditionalInfo(targetUser) {
-    this.inputToChild = targetUser;
+    this.db
+      .getUser(targetUser.id)
+      .pipe(
+        map(({ addressList, id }) => {
+          return {
+            data: addressList,
+            id
+          };
+        })
+      )
+      .subscribe(data => {
+        this.inputToChild = data;
+      });
   }
-
 }

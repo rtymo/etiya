@@ -35,7 +35,24 @@ export class DatabaseService {
       );
   }
 
-  addUser(user) {
+  addUser(data) {
+    const user = {
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      password: data.password,
+      phone: data.phone,
+      username: data.username,
+      addressList:[
+        {
+          city: data.city,
+          postalCode: data.postalCode,
+          country: data.country,
+          name: data.addressType,
+          address: data.address
+        }
+      ]
+    }
     return this.afs.collection("users").add(user);
   }
 
@@ -53,8 +70,10 @@ export class DatabaseService {
     return this.afs.doc(`users/${user.id}`).update(user);
   }
 
-  updateAdditionalInfo(user) {
-    return this.afs.doc(`users/${user.id}`).update(user)
+  updateAdditionalInfo(data, id) {
+    return this.afs.doc(`users/${id}`).set({
+      addressList: [data]
+    }, {merge: true})
   }
 
   deleteUser(id) {
