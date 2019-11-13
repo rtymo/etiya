@@ -8,14 +8,16 @@ import { NotificationsService } from 'src/app/shared/notifications/notifications
 import { DialogsService } from 'src/app/shared/dialogs/dialogs.service';
 
 @Component({
-  selector: 'app-edit-additional-info',
-  templateUrl: './edit-additional-info.component.html',
-  styleUrls: ['./edit-additional-info.component.css']
+  selector: 'app-add-additional-info',
+  templateUrl: './add-additional-info.component.html',
+  styleUrls: ['./add-additional-info.component.css']
 })
-export class EditAdditionalInfoComponent implements OnInit {
+export class AddAdditionalInfoComponent implements OnInit {
+
   form: FormGroup;
   makeControl = this.controls.makeControl(this.initData.data);
   addressTypes = ['Home', 'Work']
+
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<CreateUserComponent>,
@@ -28,6 +30,7 @@ export class EditAdditionalInfoComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+
   }
 
   createForm() {
@@ -53,16 +56,4 @@ export class EditAdditionalInfoComponent implements OnInit {
     };
     this.dialogRef.close(this.form.valid ? result : null);
   }
-
-
-  deleteAddress() {
-    this.dialogRef.close(null);
-    this.dialogs.openConfirmationDialog().subscribe(data => {
-      if (data) {
-        
-        this.notifications.successNotification("User was removed");
-      }
-    });
-  }
-
 }

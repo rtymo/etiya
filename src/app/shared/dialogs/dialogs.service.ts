@@ -7,6 +7,7 @@ import { LoginComponent } from '../../auth/login/login.component';
 import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address-info/edit-additional-info/edit-additional-info.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { AddAdditionalInfoComponent } from 'src/app/container/user-info/address-info/add-additional-info/add-additional-info.component';
 
 @Injectable()
 export class DialogsService {
@@ -48,7 +49,7 @@ export class DialogsService {
 
   openEditAdditionalInfoDialog({
     user = {},
-    title = 'Edit additional information',
+    title = 'Edit additional information'
   } = {}): Observable<User | null> {
     return this.openDialog(EditAdditionalInfoComponent, title, user);
   }
@@ -57,5 +58,12 @@ export class DialogsService {
     title = 'Confirm your action',
   } = {}) {
     return this.openDialog(ConfirmationComponent, title);
+  }
+
+  openAddAdditionalInfoDialog({
+    user = {},
+    title = 'Edit additional information'
+  } = {}): Observable<User | null> {
+    return this.openDialog(AddAdditionalInfoComponent, title, user);
   }
 }

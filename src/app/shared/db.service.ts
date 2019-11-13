@@ -3,6 +3,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFirestore } from "angularfire2/firestore";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { firestore } from 'firebase';
+
 
 @Injectable({
   providedIn: "root"
@@ -52,7 +54,7 @@ export class DatabaseService {
           address: data.address
         }
       ]
-    }
+    };
     return this.afs.collection("users").add(user);
   }
 
@@ -70,12 +72,23 @@ export class DatabaseService {
     return this.afs.doc(`users/${user.id}`).update(user);
   }
 
-  updateAdditionalInfo(data, id) {
-    return this.afs.doc(`users/${id}`).set({
+  updateAdditionalInfo(data, id, previousData) {
+    return this.afs.doc(`users/${id}`).update({
       addressList: [data]
-    }, {merge: true})
+    })
   }
 
+  addAdditionalInfo(data, id){
+    return this.afs.doc(`users/${id}`).update({
+      addressList: firestore.FieldValue.arrayUnion(data)
+    })
+  }
+
+  deleteAdditionalInfo(data, id){
+    return this.afs.doc(`users/${id}`).update({
+      addressList: firestore.FieldValue.arrayRemove(data)
+    })
+  }
   deleteUser(id) {
     this.afs.doc(`users/${id}`).delete();
   }

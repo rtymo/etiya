@@ -22,6 +22,7 @@ export class AdditionalInfoTableComponent {
     { key: "city", header: "city" },
     { key: "postalCode", header: "postalCode" }
   ];
+  previousData: any;
   constructor(
     private db: DatabaseService,
     private dialogs: DialogsService,
@@ -29,21 +30,33 @@ export class AdditionalInfoTableComponent {
   ) {}
 
   ngOnChanges(changes) {
-    console.log(changes.data.currentValue)
     this.dataSource$ = of(changes.data.currentValue.data);
+    this.previousData = changes.data.currentValue.data
     this.userID = changes.data.currentValue.id;
   }
 
   editAddress(user) {
     this.dialogs
-      .openEditAdditionalInfoDialog({ user })
+      .openEditAdditionalInfoDialog({user})
       .pipe(filter(Boolean))
       .subscribe(res => {
-        console.log(res)
-        this.db.updateAdditionalInfo(res, this.userID);
+        this.db.updateAdditionalInfo(res, this.userID, this.previousData);
         this.notifications.successNotification(
           "Additional information was updated"
         );
       });
+  }
+
+  addAddress(){
+    this.dialogs
+      .openAddAdditionalInfoDialog()
+      .pipe(filter(Boolean))
+      .subscribe(res => {
+        this.db.addAdditionalInfo(res, this.userID);
+        this.notifications.successNotification(
+          "Additional information was added"
+        );
+
+      })
   }
 }

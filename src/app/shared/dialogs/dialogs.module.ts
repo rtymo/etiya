@@ -13,6 +13,7 @@ import { AddressInfoComponent } from 'src/app/container/user-info/address-info/a
 import { EditUserComponent } from 'src/app/container/user-info/edit-user/edit-user.component';
 import { EditAdditionalInfoComponent } from 'src/app/container/user-info/address-info/edit-additional-info/edit-additional-info.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { AddAdditionalInfoComponent } from 'src/app/container/user-info/address-info/add-additional-info/add-additional-info.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
     AddressInfoComponent,
     EditUserComponent,
     EditAdditionalInfoComponent,
+    AddAdditionalInfoComponent,
     ConfirmationComponent
   ],
   entryComponents: [
@@ -29,6 +31,7 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
     LoginComponent,
     EditUserComponent,
     EditAdditionalInfoComponent,
+    AddAdditionalInfoComponent,
     ConfirmationComponent
   ],
   providers: [

@@ -6,8 +6,8 @@
     <form [formGroup]="form" novalidate>
       <div class="profile_dialog_personal_information_wrapper">
         <div class="full_size_form">
-          <mat-form-field>
-            <input matInput placeholder="Address Type" formControlName="name" />
+          <mat-form-field >
+            <input matInput placeholder="Address Type" formControlName="name" [disabled]="true"/>
             <mat-error *ngIf="form.controls['name'].hasError('required')">
               The field is <strong>required</strong>
             </mat-error>
@@ -47,7 +47,6 @@
               This field must contain more than <strong>4 numbers</strong>
             </mat-error>
           </mat-form-field>
-          <!-- <input hidden matInput formControlName="id" /> -->
         </div>
       </div>
     </form>
@@ -65,4 +64,9 @@
   >
     Update
   </button>
+
+  <button mat-raised-button color="warn" (click)="deleteAddress()">
+      Delete
+    </button>
+
 </div>
