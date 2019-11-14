@@ -1,8 +1,9 @@
-<app-table
-  *ngIf="!!dataSource$"
-  [data]="dataSource$"
-  [columns]="additionalColumns"
-  (clickOnUser)="editAddress($event)"
->
-</app-table>
-<button mat-button (click)="addAddress()">Add new</button>
+<div *ngIf="!!dataSource$">
+  <app-table
+    [data]="dataSource$"
+    [columns]="additionalColumns"
+    (clickOnUser)="editAddress($event)"
+  >
+  </app-table>
+  <button mat-button (click)="addAddress()">Add new</button>
+</div>

@@ -72,10 +72,10 @@ export class DatabaseService {
     return this.afs.doc(`users/${user.id}`).update(user);
   }
 
-  updateAdditionalInfo(data, id, previousData) {
-    return this.afs.doc(`users/${id}`).update({
+  updateAdditionalInfo(data) {
+    return this.afs.doc(`users/${data.id}`).set({
       addressList: [data]
-    })
+    }, {merge: true})
   }
 
   addAdditionalInfo(data, id){

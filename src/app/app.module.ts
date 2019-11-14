@@ -16,6 +16,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from './shared/environment';
+import { UsersState } from './container/user-info/users.state';
+import { NgxsModule } from '@ngxs/store';
 
 
 @NgModule({
@@ -35,6 +37,10 @@ import { environment } from './shared/environment';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    NgxsModule.forRoot([
+      UsersState
+  ]),
+  
 
   ],
   providers: [],

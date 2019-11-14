@@ -2,7 +2,7 @@ import { Component, Input, SimpleChange, OnInit } from "@angular/core";
 import { User } from "src/app/shared/user.interface";
 import { DatabaseService } from "src/app/shared/db.service";
 import { DialogsService } from "src/app/shared/dialogs/dialogs.service";
-import { filter } from "rxjs/operators";
+import { filter, map, tap, pluck } from "rxjs/operators";
 import { NotificationsService } from "src/app/shared/notifications/notifications.service";
 import { of } from "rxjs";
 
@@ -13,7 +13,7 @@ import { of } from "rxjs";
 })
 export class AdditionalInfoTableComponent {
   @Input() data: User;
-
+  currentUser: User;
   dataSource$;
   userID: string;
   additionalColumns = [
@@ -30,9 +30,19 @@ export class AdditionalInfoTableComponent {
   ) {}
 
   ngOnChanges(changes) {
-    this.dataSource$ = of(changes.data.currentValue.data);
-    this.previousData = changes.data.currentValue.data
-    this.userID = changes.data.currentValue.id;
+    changes.data.currentValue.pipe(
+      filter(Boolean),
+      map(({ addressList, id }) => {
+        return {
+          data: addressList,
+          id
+        };
+      })
+      )
+    .subscribe((userInfo)=>{
+      this.dataSource$ = of(userInfo.data);
+      this.userID = userInfo.id
+    })
   }
 
   editAddress(user) {
@@ -40,7 +50,11 @@ export class AdditionalInfoTableComponent {
       .openEditAdditionalInfoDialog({user})
       .pipe(filter(Boolean))
       .subscribe(res => {
-        this.db.updateAdditionalInfo(res, this.userID, this.previousData);
+        const objUser = {
+          ...res,
+          id: this.userID
+        }
+        this.db.updateAdditionalInfo(objUser);
         this.notifications.successNotification(
           "Additional information was updated"
         );

@@ -1,12 +1,17 @@
 export interface User {
-  id?: number;
+  id?: string;
   email?: string;
   name: string;
   surname: string;
   username: string;
   password: string;
   phone?: string;
-  address?: string;
-  img?: string;
-  token?: string;
+  addressList: [
+    {
+      name: string,
+      city: string,
+      country: string,
+      postalCode: number
+    }
+  ]
 }

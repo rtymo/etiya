@@ -1,25 +1,28 @@
 import { Component, OnInit } from "@angular/core";
 import { DatabaseService } from "src/app/shared/db.service";
-import { Subject, of } from "rxjs";
+import { Subject, of, Observable } from "rxjs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { User } from "src/app/shared/user.interface";
 import { pluck, map } from "rxjs/operators";
+import { Select, Store } from '@ngxs/store';
+import { UsersState } from '../user-info/users.state';
+import { GetUser } from '../user-info/users.action';
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit {
+  @Select(UsersState.getUserInformation) inputToChild: Observable<User[]>;
   form: FormGroup;
   startAt = new Subject();
   endAt = new Subject();
   loaded: boolean = false;
   startObs = this.startAt.asObservable();
   endObs = this.endAt.asObservable();
-  inputToChild;
   users$;
-  constructor(private db: DatabaseService, private formBuilder: FormBuilder) {}
+  constructor(private db: DatabaseService, private formBuilder: FormBuilder, private store: Store) {}
 
   ngOnInit() {
     this.createForm();
@@ -120,18 +123,6 @@ export class SearchComponent implements OnInit {
   }
 
   getAdditionalInfo(targetUser) {
-    this.db
-      .getUser(targetUser.id)
-      .pipe(
-        map(({ addressList, id }) => {
-          return {
-            data: addressList,
-            id
-          };
-        })
-      )
-      .subscribe(data => {
-        this.inputToChild = data;
-      });
+    this.store.dispatch(new GetUser(targetUser))
   }
 }

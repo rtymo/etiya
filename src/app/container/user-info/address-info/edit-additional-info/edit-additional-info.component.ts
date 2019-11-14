@@ -7,6 +7,7 @@ import { DatabaseService } from 'src/app/shared/db.service';
 import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
 import { DialogsService } from 'src/app/shared/dialogs/dialogs.service';
 
+
 @Component({
   selector: 'app-edit-additional-info',
   templateUrl: './edit-additional-info.component.html',
@@ -59,7 +60,7 @@ export class EditAdditionalInfoComponent implements OnInit {
     this.dialogRef.close(null);
     this.dialogs.openConfirmationDialog().subscribe(data => {
       if (data) {
-        
+        this.db.deleteAdditionalInfo(this.initData.data, this.initData.data.id)
         this.notifications.successNotification("User was removed");
       }
     });
